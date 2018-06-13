@@ -1,0 +1,54 @@
+{% extends 'snippet/layout.html' %}
+
+{% load blog_extras %}
+
+{% block javascript %}
+{{ form.media }}
+<script type="text/javascript">
+       var getInitNetWork = function(data){
+           $.ajax({
+             async: false,
+             type: "GET",
+             url: "http://localhost:8000/get_topic_title",
+             timeout: 3000,
+             contentType: "application/json;utf-8",
+             data: 'id=1',
+             success: function(msg) {
+
+              }
+           })
+       }
+
+       $(function(){
+            getInitNetWork()
+        })
+</script>
+{% endblock %}
+
+{% block main %}
+<div class="container-box">
+    {% for line in topic_list %}
+    <div class="span3 right">
+        <div class="">{{line.title}}</div>
+        {% for item in line.data %}
+        <br>
+        <div class="">
+            <div class="content">{{item.Content | safe}}</div>
+        </div>
+        {% endfor %}
+    </div>
+    {% endfor %}
+</div>
+{% endblock %}
+
+{% block sidebar %}
+{% if user.is_authenticated %}
+<div class="edit-area">
+    {{ form }}
+</div>
+{% else %}
+
+{% endif %}
+
+{% endblock %}
+
