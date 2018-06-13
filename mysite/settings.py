@@ -24,8 +24,8 @@ SECRET_KEY = 'gq23)-er(51_xesbge4y)m=aro_4uw^w=p-$7nf)ew_eyw@&0$'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.16.30', 'localhost', '127.0.0.1', ]
-# ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['192.168.16.30', 'localhost', '127.0.0.1', ]
+ALLOWED_HOSTS = []
 
 
 # Application definition
@@ -142,7 +142,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 
 STATICFILES_DIRS = (
     # ('alias_hello',os.path.join(BASE_DIR,'blog','statics'))
-    # os.path.join(BASE_DIR, "my-blog-app/build/static"),
+    os.path.join(BASE_DIR, "my-blog-app/build/static"),
 )
 
 MEDIA_URL = '/media/'
@@ -151,8 +151,8 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR, 'templates')],
-        # 'DIRS': ['my-blog-app/build'],
+        # 'DIRS': [os.path.join(BASE_DIR, 'templates')],
+        'DIRS': ['my-blog-app/build'],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
