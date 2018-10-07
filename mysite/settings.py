@@ -22,29 +22,48 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'gq23)-er(51_xesbge4y)m=aro_4uw^w=p-$7nf)ew_eyw@&0$'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG =True
 
-# ALLOWED_HOSTS = ['192.168.16.30', 'localhost', '127.0.0.1', ]
-ALLOWED_HOSTS = []
+# ALLOWED_HOSTS = ['192.168.0.108', 'localhost', '127.0.0.1', ]
+ALLOWED_HOSTS = ['*',]
+
+APPEND_SLASH=True #设置项是否开启URL访问地址后面不为/跳转至带有/的路径
 
 
 # Application definition
 
-INSTALLED_APPS = [
-    'django.contrib.admin',
-    'django.contrib.auth',
-    'django.contrib.contenttypes',
-    'django.contrib.sessions',
-    'django.contrib.messages',
-    'django.contrib.staticfiles',
-]
+
+# INSTALLED_APPS = [
+#     'django.contrib.admin',
+#     'django.contrib.auth',
+#     'django.contrib.contenttypes',
+#     'django.contrib.sessions',
+#     'django.contrib.messages',
+#     'django.contrib.staticfiles',
+#     'rest_framework',
+#     'rest_framework.authtoken',
+# ]
+
+
+REST_FRAMEWORK = {
+    'DEFAULT_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',#只能被注册的用户访问
+    ),
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.BasicAuthentication',
+        'rest_framework.authentication.SessionAuthentication',
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+    'PAGINATE_BY': 10
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
+    # 'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
@@ -93,11 +112,12 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'blog',
         'USER': 'root',
-        'PASSWORD': 'root',
+        'PASSWORD': '995277',
         'HOST': '127.0.0.1',
         'PORT': '3306',
         'OPTIONS': {
             'autocommit': True,
+            'init_command': 'SET sql_mode=STRICT_TRANS_TABLES',
         },
     }
 }
@@ -145,6 +165,9 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "my-blog-app/build/static"),
 )
 
+# STATIC_DIRS = [STATICFILES_DIRS,]
+
+
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
@@ -186,13 +209,18 @@ INSTALLED_APPS = (
     'DjangoUeditor',
     'django.contrib.sitemaps',  # Django sitemap framework
     'blog',
+    'rest_framework', #坑了一下午 TemplateDoesNotExist Exception Value:	 rest_framework/api.html
+    'rest_framework.authtoken',
 )
 
 # 自定义User类
 AUTH_USER_MODEL = 'blog.ForumUser'
 
 # 用户认证BackEnds
-AUTHENTICATION_BACKENDS = ('blog.backends.EmailAuthBackend',)
+AUTHENTICATION_BACKENDS = (
+    'django.contrib.auth.backends.ModelBackend',
+    'blog.backends.EmailAuthBackend',
+)
 
 # 默认登陆uri
 LOGIN_URL = '/login/'

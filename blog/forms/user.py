@@ -1,7 +1,8 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.conf import settings
-from blog.models import ForumUser
+from blog.models import ForumUser,MediaFile
+from django.forms import ModelForm
 
 
 error_messages = {
@@ -28,20 +29,48 @@ class TopicForm(forms.Form):
     title = forms.CharField(min_length=6, max_length=64,
                                error_messages=error_messages.get('title'))
 
+class MediaFileForm(forms.Form):
+    name = forms.CharField(required=True,
+                             error_messages={'required': "邮箱不能为空"})
+    image = forms.ImageField(required=True,
+                             error_messages={'required': "图片不能为空"})
+
+class VideoFileForm(forms.Form):
+    id = forms.CharField(required=False,
+                           error_messages={'required': "邮箱不能为空"})
+    video = forms.FileField(required=True,
+                           error_messages={'required': "video不能为空"})
+    def clean_video(self):
+        mp4 = self.cleaned_data['video']
+        if not mp4.name.endswith('mp4'):
+            raise forms.ValidationError(u'不是mp4格式')
+        return mp4
+
+class fileForm(forms.Form):
+    id = forms.CharField(required=False,
+                           error_messages={'required': "邮箱不能为空"})
+    file = forms.FileField(required=True,
+                            error_messages={'required': "video不能为空"})
+
+
 class LoginForm(forms.Form):
-    email = forms.EmailField(min_length=4, max_length=64,
+    email = forms.EmailField(required=False,
         error_messages=error_messages.get('email'))
+    username = forms.CharField(required=False)
     password = forms.CharField(min_length=6, max_length=64,
         error_messages=error_messages.get('password'))
+
     def __init__(self, *args, **kwargs):
         self.user_cache = None;
         super(LoginForm, self).__init__(*args,**kwargs)
 
     def clean(self):
         email = self.cleaned_data.get('email')
+        user_name = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-        if email and password:
-            self.user_cache = authenticate(username = email,password = password)
+        username = user_name if user_name.strip() != '' else email
+        if username and password:
+            self.user_cache = authenticate(username = username,password = password)
             if self.user_cache is None:
                 print('邮箱或者密码不正确')
                 raise forms.ValidationError(u'邮箱或者密码不正确')
@@ -60,11 +89,12 @@ class RegisterForm(forms.ModelForm):
         error_messages=error_messages.get('email'))
     password = forms.CharField(min_length=6, max_length=64,
         error_messages=error_messages.get('password'))
-    password_confirm = forms.CharField(required=False)
+    password_confirm = forms.CharField(required=False),
+    nickname = forms.CharField(required=False,error_messages={'required': "昵称不能为空"})
 
     class Meta:
         model = ForumUser
-        fields = ('username', 'email')
+        fields = ('username', 'email','nickname')
 
     def clean_username(self):
         username = self.cleaned_data['username']
@@ -90,6 +120,10 @@ class RegisterForm(forms.ModelForm):
         if password1 and password2 and password1 != password2:
             raise forms.ValidationError(u'两次输入密码不一致')
         return password2
+
+    def clean_nickname(self):
+        nickname = self.cleaned_data.get('nickname')
+        return nickname
 
     def save(self, commit=True):
         user = super(RegisterForm, self).save(commit=False)

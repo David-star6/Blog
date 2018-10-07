@@ -13,25 +13,28 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
-from django.conf.urls import  include, url
+from django.conf.urls import include, url
 from django.conf import settings
 
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 
 admin.autodiscover()
-admin.site.login = login_required(admin.site.login) # 设置admin登录的页面，settings.LOGIN_URL
+admin.site.login = login_required(admin.site.login)  # 设置admin登录的页面，settings.LOGIN_URL
 
 from django.urls import path
 import blog.urls
+from django.views import static
 
 from DjangoUeditor import urls as DjangoUeditor_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
     url(r'^', include(blog.urls)),
-    url(r'^manage/admin/', admin.site.urls),
+    url(r'^manage/admin', admin.site.urls),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
+    # 增加以下一行，以识别静态资源
+    url(r'^static/(?P<path>.*)$', static.serve, {'document_root': settings.STATIC_ROOT}, name='static')
 
 ]
 
@@ -40,5 +43,6 @@ from django.conf import settings
 
 if settings.DEBUG:
     from django.conf.urls.static import static
+
     urlpatterns += static(
         settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

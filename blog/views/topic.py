@@ -21,6 +21,9 @@ from django.utils.cache import get_cache_key
 import traceback
 import sys
 
+import re
+
+
 from django.views.generic import ListView
 
 from blog.forms.user import TopicForm
@@ -101,6 +104,34 @@ def expire_page(path):
     key = get_cache_key(request)
     if cache.has_key(key):
         cache.delete(key)
+
+
+def get_topic(request):
+    topicList = Topic.objects.all().order_by('id')
+    objs = []
+    dr = re.compile(r'<[^>]+>',re.S)
+    for item in topicList:
+            obj = {}
+            mode = item.blog_set.order_by('id').values()
+            obj['title'] = model_to_dict(item)['title']
+            arr = []
+            for model in mode:
+                model['content'] = dr.sub('', model.get('content'))
+                arr.append(model)
+            # model = mode[0]
+            # model['Content'] = dr.sub('', model.get('Content'))
+            # obj['data'] = model
+            obj['data'] = arr
+            objs.append(obj)
+    return returnJson.json_responre(objs)
+
+
+def get_topic_content(request):
+    print(request.POST.get('id'))
+    fid = request.POST.get('id')
+    model = Blog.objects.get(id=fid)
+    u = json.dumps(model_to_dict(model), cls=returnJson.DataTimeEncoder)
+    return returnJson.json_responre(json.loads(u), safe=False)
 
 class topicList(ListView):
     template_name = 'topic/topicHome.html'

@@ -10,6 +10,7 @@ class EmailAuthBackend(ModelBackend):
 			return None
 		except ForumUser.DoesNotExist:
 			return None;
+
 	def get_user(self,user_id):
 		try:
 			return ForumUser.objects.get(pk=user_id)
