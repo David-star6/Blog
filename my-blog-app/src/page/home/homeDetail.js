@@ -37,7 +37,6 @@ class homeDetail extends basePage {
         let patam = { "id": arr[1] };
         netWork.post('/api/get_topic_content/', patam, (repson) => {
             if (repson.code == 200) {
-                console.log(repson)
                 this._setTitle('neirong')
                 this.setState({
                     content: repson.data['content']
@@ -48,14 +47,21 @@ class homeDetail extends basePage {
         })
     }
 
+    renderWeb() {
+        return <div className='article-content' dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+
+    }
+
     renderContent() {
-        return <div dangerouslySetInnerHTML={{ __html: this.state.content }}></div>
+        return <div className='article'>
+            {this.renderWeb()}
+        </div>
     }
 
     render() {
         return (
             <div>
-                {this._navagationView()}
+                {this._navagationHome()}
                 <div className='line'></div>
                 {this.renderContent()}
             </div >

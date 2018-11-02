@@ -1,4 +1,5 @@
 let key = {
+    ROUTE_PATH_LOGIN: '/userLogin',
     USER_LOGIN: 'userLogin',
     USER_Authorization: 'Authorization',
     USER_CENTER_ICON_HOME: 'home',

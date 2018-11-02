@@ -3,18 +3,26 @@
 
 
 .navbar-header{background: url(../img/ic_heard_img.png)no-repeat ; position: relative; height: 160px;}
-.navbar-title{width: 100%;padding: 20px;text-align: left}
+.navbar-title{width: 100%;padding: @frame-space-base ;text-align: left}
 .base-size{font-size: @font-size-base ;color: @body-background  }
 .lg-size{font-size: @font-size-title  ;color: @body-background }
-.navbar-meus{opacity: 0.5; text-align: end;height: 45px;width: 100%; background-color: @body-background-black }
+
+.navbar-meus{display: flex;flex-direction:row; align-items: center; opacity: 0.5; text-align: center;height: 45px;width: 100%; background-color: @body-background-black }
+.navbar-meus-item{margin-left: @frame-space-base ;color: @body-background ;}
+.navbar-meus-log{margin-right: @frame-space-base ;color: @body-background ;}
+.navbar-meus-flex{flex: 1}
+.navbar-meus-item:hover{color: @text-color-secondary}
+.navbar-meus-log:hover{color: @text-color-secondary}
 .list{text-align: center;width: 80%}
 .line{width: 100%;height: 1px;background-color:#ddd}
+
 .navbar-list-right{border-color: #666; border-bottom-right-radius: 10px; border-bottom-left-radius: 10px; color: #fff; text-align: center;background-color:#fb7299;margin-right: 50px;line-height: 50px; height: 50px;}
 .navbar-header-operate{display:flex;width: 100%;height: 45px;background-color: #fff; }
 .navbar-header-operate-title{margin-left:85px; font-size:@font-size-base;color:@text-color ;line-height: 42px;}
 .navbar-header-operate-login{margin-right:85px; font-size:@font-size-base;color:@text-color ;line-height: 42px;}
 .navbar-header-operate-function{height: 42px;line-height: 42px;margin-right: 100px;}
 .navbar-header-operate-function-item{display:inline-block;text-align: center;  font-size:@font-size-base;color:@text-color;height: 2.8125rem;width: 50px}
+
 .item-button{text-align: center;}
 a {color:gray; text-decoration:none;} 
 .homeIcon-class{position: absolute; padding-left: 0px; padding-top: 12px;width: 45px;height: 45px;}
@@ -48,3 +56,5 @@ a {color:gray; text-decoration:none;}
 .user-log-input{margin: 0 auto;width: 240px;}
 .user-regist-input{margin: 0 auto;width: 440px;}
 
+.article{display: flex;flex-direction: 'row';width: 100%;};
+.article-content{width: 80%;padding: @frame-space-base}

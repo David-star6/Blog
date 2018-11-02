@@ -12,6 +12,7 @@ import netWork from '../../src/utills/NetUtil'
 
 import homeIcon from '../img/ic_home.svg'
 
+import key from '../../src/utills/KeyUtil'
 
 export default class basePage extends React.Component {
 
@@ -66,13 +67,16 @@ export default class basePage extends React.Component {
     _navagationHome() {
         return <div className='navbar-header'>
             <div className='navbar-meus'>
-                <Button ghost={false} className='navbar-list-right' onClick={this._handleLogin.bind(this)}>登 录</Button>
+                <a href="/" className='navbar-meus-item'>首页</a>
+                <div className='navbar-meus-flex'></div>
+                <a href={key.ROUTE_PATH_LOGIN} className='navbar-meus-log'>登陆</a>
+                {/* <Button ghost={false} className='navbar-list-right' onClick={this._handleLogin.bind(this)}>登 录</Button> */}
             </div>
             <div className='navbar-title'>
                 <div className='lg-size'>DVD的网络日志</div>
                 <div className='base-size'>记录自己学习的点滴，做个与智者通行的人</div>
             </div>
-        </div>
+        </div >
     }
 
     _onBlur() {
