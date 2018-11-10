@@ -1,7 +1,7 @@
 from django import forms
 from django.contrib.auth import authenticate
 from django.conf import settings
-from blog.models import ForumUser,MediaFile
+from blog.models import ForumUser
 from django.forms import ModelForm
 
 
@@ -29,11 +29,6 @@ class TopicForm(forms.Form):
     title = forms.CharField(min_length=6, max_length=64,
                                error_messages=error_messages.get('title'))
 
-class MediaFileForm(forms.Form):
-    name = forms.CharField(required=True,
-                             error_messages={'required': "邮箱不能为空"})
-    image = forms.ImageField(required=True,
-                             error_messages={'required': "图片不能为空"})
 
 class VideoFileForm(forms.Form):
     id = forms.CharField(required=False,
@@ -70,7 +65,7 @@ class LoginForm(forms.Form):
         password = self.cleaned_data.get('password')
         username = user_name if user_name.strip() != '' else email
         if username and password:
-            self.user_cache = authenticate(username = username,password = password)
+            self.user_cache = authenticate(username=username,password=password)
             if self.user_cache is None:
                 print('邮箱或者密码不正确')
                 raise forms.ValidationError(u'邮箱或者密码不正确')

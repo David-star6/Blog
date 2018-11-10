@@ -46,21 +46,13 @@ class Topic(models.Model):
     created = models.DateTimeField(null=True, blank=True)
     updated = models.DateTimeField(null=True, blank=True)
 
-class MediaFile(models.Model):
-    '''
-    圖片表
-    '''
-    name = models.CharField(max_length=50)
-    image = models.ImageField(upload_to='upload/')
-    def __str__(self):
-        return self.name
-
-class VideoFile(models.Model):
+class File(models.Model):
     '''
     文件
     '''
+    userId = models.IntegerField(null=True,blank=True)
     fid =  models.IntegerField(null=True, blank=True)
-    video = models.FileField(upload_to='upload/')
+    file = models.FileField(upload_to='upload/')
     def __str__(self):
         return  self.name
 

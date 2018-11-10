@@ -4,8 +4,8 @@ let key = {
     USER_Authorization: 'Authorization',
     USER_CENTER_ICON_HOME: 'home',
     USER_CENTER_ICON_UPLOAD: 'upload',
-    // BASE_URL: ' http://127.0.0.1:8000'
-    BASE_URL: 'http://47.104.227.20:9000',
+    BASE_URL: ' http://127.0.0.1:8000'
+    // BASE_URL: 'http://47.104.227.20:9000',
 }
 
 export default key;
