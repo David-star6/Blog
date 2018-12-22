@@ -50,8 +50,8 @@ class File(models.Model):
     '''
     文件
     '''
-    userId = models.IntegerField(null=True,blank=True)
-    fid =  models.IntegerField(null=True, blank=True)
+    user_id = models.IntegerField(null=True,blank=True)
+    file_name =  models.CharField(max_length=200,null=True, blank=True)
     file = models.FileField(upload_to='upload/')
     def __str__(self):
         return  self.name
@@ -70,12 +70,12 @@ class Blog(models.Model):
                            upload_settings={"imageMaxSize": 1204000},
                            settings={}, command=None, blank=True)
 
-class UserCenterTitle(models.Model):
+class UserCenter(models.Model):
     '''
-    用户中心的标题
+    用户中心
     '''
     name = models.CharField('标题名称',max_length=10,null=True,blank=True)
     weight = models.IntegerField('1-100',default=1,validators=[MaxValueValidator(100),MinValueValidator(1)])
     icon = models.CharField('标题的icon',max_length=50,null=True,blank=True)
-    isSuper = models.BooleanField('是否是超级用户所有',default=False)
+    is_super = models.BooleanField('是否是超级用户所有',default=False)
 

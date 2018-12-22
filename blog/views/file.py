@@ -67,9 +67,10 @@ def uploadImage(request, **kwargs):
         return render(request, 'user/upload.html', kwargs)
     if request.method == 'POST':
         form = FileForm(request.POST,request.FILES)
+        print(request.FILES)
         if form.is_valid():
             dic = form.cleaned_data
-            new = File(name = dic.get('name'),image = dic.get('image'))
+            new = File(file = dic.get('file'))
             new.save()
             return HttpResponse('存储成功')
         else:

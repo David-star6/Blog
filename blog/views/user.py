@@ -10,7 +10,7 @@ from blog.forms.user import  LoginForm,RegisterForm
 from blog.views import returnJson
 from django.views.decorators.csrf import csrf_exempt
 from  blog.models import ForumUser
-from blog.models import UserCenterTitle
+from blog.models import UserCenter
 
 
 from rest_framework.authentication import SessionAuthentication, BasicAuthentication
@@ -25,10 +25,6 @@ from rest_framework.authtoken import views
 
 
 from django.http import HttpResponse
-
-
-
-
 
 
 from django.dispatch import receiver
@@ -76,7 +72,7 @@ def get_charm(request):
 @api_view(['GET'])
 @permission_classes((IsAuthenticated,))
 def get_userCentertitle(request):
-	title = UserCenterTitle.objects.all().values()
+	title = UserCenter.objects.all().values()
 	return returnJson.json_responre(title)
 
 

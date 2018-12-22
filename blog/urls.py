@@ -18,7 +18,7 @@ urlpatterns = [
 
     # url(r'^api/getFile/$',common.method_splitter,{'GET':util.getFile}),
     # url(r'^api/uploadFile/$',common.method_splitter,{'GET':util.uploadFile,'POST':util.uploadFile}),
-    # url(r'^api/upload_image/$',common.method_splitter,{'GET':file.uploadImage,'POST':file.uploadImage}),
+    url(r'^file/upload/$',common.method_splitter,{'GET':file.uploadImage,'POST':file.uploadImage}),
     # url(r'^api/upload_video/$',common.method_splitter,{'GET':util.uploadVideo,'POST':util.uploadVideo}),
     # url(r'^api/showAllImage/$',common.method_splitter,{'GET':util.showUploadImage}),
     # url(r'^api/dele_file/$',common.method_splitter,{"POST":util.deleFile}),
