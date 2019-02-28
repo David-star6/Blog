@@ -6,13 +6,11 @@ import { height } from 'window-size';
 
 import { Link } from 'react-router-dom';
 
-import '../style/base.less'
+import netWork from '../../../src/utills/NetUtil'
 
-import netWork from '../../src/utills/NetUtil'
+import homeIcon from '../../img/ic_home.svg'
 
-import homeIcon from '../img/ic_home.svg'
-
-import key from '../../src/utills/KeyUtil'
+import key from '../../../src/utills/KeyUtil'
 
 export default class basePage extends React.Component {
 
@@ -65,6 +63,7 @@ export default class basePage extends React.Component {
 
 
     _navagationHome() {
+        return null
         return <div className='navbar-header'>
             <div className='navbar-meus'>
                 <a href="/" className='navbar-meus-item'>首页</a>
@@ -90,6 +89,7 @@ export default class basePage extends React.Component {
      * **/
 
     _navagationView() {
+        return null
         return <div className='navbar-header-operate'>
             <div className='navbar-header-operate-title-text'></div>
             <div className='navbar-header-operate-title right'>
@@ -121,7 +121,6 @@ export default class basePage extends React.Component {
                 }}>注册</a></div>
             </div>
         </div>
-
     }
 
     _setTitle(title) {

@@ -10,7 +10,7 @@ import 'moment/locale/zh-cn';
 
 import Button from 'antd/lib/button';
 
-import basePage from '../../../src/base/basePage'
+import { BasePage } from '../../../src/common/index'
 
 import netWork from '../../../src/utills/NetUtil'
 
@@ -22,7 +22,7 @@ import cookie from '../../../src/utills/CookieUtil'
 
 import keys from '../../../src/utills/KeyUtil'
 
-class homeDetail extends basePage {
+class homeDetail extends BasePage {
 
     constructor(props) {
         super(props)

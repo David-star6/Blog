@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import basePage from '../../base/basePage'
+import { BasePage } from '../../../src/common/index'
 
 import netWork from '../../../src/utills/NetUtil'
 
@@ -301,7 +301,7 @@ class RegistrationForm extends React.Component {
 
 const WrappedRegistrationForm = Form.create()(RegistrationForm);
 
-class userRegister extends basePage {
+class userRegister extends BasePage {
     constructor(props) {
         super(props)
         this.state = {

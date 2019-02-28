@@ -12,7 +12,7 @@ import 'moment/locale/zh-cn';
 
 import Button from 'antd/lib/button';
 
-import basePage from '../../../src/base/basePage'
+import { BasePage } from '../../../src/common/index'
 
 import netWork from '../../../src/utills/NetUtil'
 
@@ -28,7 +28,7 @@ import rightIcon from '../../../src/img/ic_right.svg'
 
 import HomdeMode from '../../mode/HomeMode'
 
-class home extends basePage {
+class home extends BasePage {
     constructor(props) {
         super(props)
         this.state = {
@@ -44,15 +44,15 @@ class home extends basePage {
 
     componentDidMount() {
         super.componentDidMount()
-        netWork.get('/api/get_topic_list', (param) => {
-            if (param.data.length > 0) {
-                this.setState({
-                    data: param.data[0].data
-                })
-            }
-        }, (error) => {
-            error && alert(error)
-        })
+        // netWork.get('/api/get_topic_list', (param) => {
+        //     if (param.data.length > 0) {
+        //         this.setState({
+        //             data: param.data[0].data
+        //         })
+        //     }
+        // }, (error) => {
+        //     error && alert(error)
+        // })
     }
 
 

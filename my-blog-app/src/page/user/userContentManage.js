@@ -4,7 +4,7 @@ import { Row, Col, Menu, Icon, Upload, Button, message, Modal, Divider } from 'a
 
 import { Redirect } from 'react-router-dom';
 
-import basePage from '../../base/basePage'
+import { BasePage } from '../../../src/common/index'
 
 import netWork from '../../../src/utills/NetUtil'
 
@@ -57,7 +57,7 @@ class Sider extends React.Component {
     }
 }
 
-class userContentManage extends basePage {
+class userContentManage extends BasePage {
     currentSelect;
     constructor(props) {
         super(props)

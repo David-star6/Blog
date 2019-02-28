@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import basePage from '../../base/basePage'
+import { BasePage } from '../../../src/common/index'
 
 import netWork from '../../../src/utills/NetUtil'
 
