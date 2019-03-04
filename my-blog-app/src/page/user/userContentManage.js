@@ -10,7 +10,7 @@ import netWork from '../../../src/utills/NetUtil'
 
 import keys from '../../../src/utills/KeyUtil'
 
-import '../../style/base.less'
+import '../../style/index.less'
 
 import DVListView from '../../view/DVListView'
 

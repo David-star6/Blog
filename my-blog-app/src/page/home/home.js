@@ -24,7 +24,7 @@ import cookie from '../../../src/utills/CookieUtil'
 
 import keys from '../../../src/utills/KeyUtil'
 
-import rightIcon from '../../../src/img/ic_right.svg'
+import rightIcon from '../../../src/style/img/ic_right.svg'
 
 import HomdeMode from '../../mode/HomeMode'
 

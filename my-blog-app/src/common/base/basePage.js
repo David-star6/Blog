@@ -8,7 +8,7 @@ import { Link } from 'react-router-dom';
 
 import netWork from '../../../src/utills/NetUtil'
 
-import homeIcon from '../../img/ic_home.svg'
+import homeIcon from '../../style/img/ic_home.svg'
 
 import key from '../../../src/utills/KeyUtil'
 

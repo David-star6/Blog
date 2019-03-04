@@ -9,6 +9,8 @@ import { Layout, notification, Icon } from 'antd';
 
 import Home from '../src/page/home/home'
 
+import Routes from './routes/index'
+
 import { HeaderCustom } from './components/index'
 
 import DocumentTitle from 'react-document-title';
@@ -27,22 +29,21 @@ class App extends Component {
   render() {
     const { title } = this.state;
     return (
-      <DocumentTitle title={'title'}>
+      <DocumentTitle title={title}>
         <Layout style={{ flexDirection: 'column' }}>
           <HeaderCustom />
           <Content style={{ margin: '0 0px', overflow: 'initial', flex: '1 1 0' }}>
             {/* <Routes auth={auth} onRouterChange={this._setTitle} /> */}
-            <Route path='/app/index' render={props => {
+            {/* <Route path='/app/index' render={props => {
               return <Home />
-            }}></Route>
+            }}></Route> */}
+            <Routes />
           </Content>
           <Footer style={{ textAlign: 'center' }}>
             React-Admin ©{new Date().getFullYear()} Created by dvd
           </Footer>
         </Layout>
         {/* 
-          <Route path='/page1' component={Page1}></Route>
-          <Route path='/page2' component={Page2}></Route>
           <Route path={key.ROUTE_PATH_LOGIN} component={userLogin}></Route>
           <Route path='/userhome' component={userhome}></Route>
           <Route path='/regist' component={regist}></Route>

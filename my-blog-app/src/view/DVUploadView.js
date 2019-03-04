@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 
 import { Row, Col, Menu, Icon, Upload, Button, message } from 'antd';
 
-import '../style/base.less'
+import '../style/index.less'
 
 import keys from '../../src/utills/KeyUtil'
 

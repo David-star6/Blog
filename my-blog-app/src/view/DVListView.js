@@ -4,7 +4,7 @@ import { List, Avatar, Icon } from 'antd';
 
 import PropTypes from 'prop-types';
 
-import '../style/base.less'
+import '../style/index.less'
 
 import keys from '../../src/utills/KeyUtil'
 
