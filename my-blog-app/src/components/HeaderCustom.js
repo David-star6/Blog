@@ -15,7 +15,9 @@ class HeaderCustom extends Component {
                 </div>
                 <div className='navbar-meus'>
                     <a href="/" className='navbar-meus-item'>首页</a>
+                    <a href="/app/classify" className='navbar-meus-item'>归档</a>
                     <div className='navbar-meus-flex'></div>
+                    <a href="/app/about" className='navbar-meus-log'>关于</a>
                     {/* <a href={key.ROUTE_PATH_LOGIN} className='navbar-meus-log'>登陆</a> */}
                     {/* <Button ghost={false} className='navbar-list-right' onClick={this._handleLogin.bind(this)}>登 录</Button> */}
                 </div>
