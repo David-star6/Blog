@@ -13,11 +13,13 @@ import Routes from './routes/index'
 
 import { HeaderCustom } from './components/index'
 
+import { BasePage } from './common/index'
+
 import DocumentTitle from 'react-document-title';
 
 const { Content, Footer } = Layout;
 
-class App extends Component {
+class App extends BasePage {
 
   constructor(props) {
     super(props)
@@ -30,16 +32,16 @@ class App extends Component {
     const { title } = this.state;
     return (
       <DocumentTitle title={title}>
-        <Layout style={{ flexDirection: 'column' }}>
+        <Layout style={{ flexDirection: 'column', backgroundColor: this._MAIN_COLOR }}>
           <HeaderCustom />
-          <Content style={{ margin: '0 0px', overflow: 'initial', flex: '1 1 0' }}>
+          <Content style={{ margin: '0 0px', overflow: 'initial', flex: '1 1 0', backgroundColor: this._MAIN_COLOR }}>
             {/* <Routes auth={auth} onRouterChange={this._setTitle} /> */}
             {/* <Route path='/app/index' render={props => {
               return <Home />
             }}></Route> */}
             <Routes />
           </Content>
-          <Footer style={{ textAlign: 'center' }}>
+          <Footer style={{ textAlign: 'center', backgroundColor: this._MAIN_COLOR }}>
             React-Admin ©{new Date().getFullYear()} Created by dvd
           </Footer>
         </Layout>

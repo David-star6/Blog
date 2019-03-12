@@ -14,6 +14,8 @@ import key from '../../../src/utills/KeyUtil'
 
 export default class basePage extends React.Component {
 
+    _MAIN_COLOR = '#fff'
+
     constructor(props) {
         super(props)
         this.state = {
