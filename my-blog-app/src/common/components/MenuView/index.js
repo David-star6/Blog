@@ -2,8 +2,10 @@ import React, { Component } from 'react';
 
 class index extends Component {
 
-    renderItem(des) {
-        return <a style={{ display: 'block', lineHeight: '40px', }}>
+    renderItem(des, index) {
+        return <a key={index} href={'javascript:void(0);'} style={{ display: 'block', lineHeight: '40px', }} onClick={() => {
+            this.props.callback && this.props.callback(index)
+        }} >
             {des}
         </a>
     }
@@ -15,7 +17,7 @@ class index extends Component {
             <div style={{ height: heights, overflow: 'scroll', borderWidth: '1px', borderColor: '#bbb', borderStyle: 'none solid none none  ' }}>
                 <div style={{ marginTop: '30px', fontWeight: 'bold' }}><p>{title}</p></div>
                 {data.map((item, index) => {
-                    return this.renderItem(item)
+                    return this.renderItem(item, index)
                 })}
             </div>
         );
