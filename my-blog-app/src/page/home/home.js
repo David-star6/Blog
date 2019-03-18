@@ -26,8 +26,6 @@ import keys from '../../../src/utills/KeyUtil'
 
 import rightIcon from '../../../src/style/img/ic_right.svg'
 
-import HomdeMode from '../../mode/HomeMode'
-
 class home extends BasePage {
     constructor(props) {
         super(props)
@@ -92,7 +90,7 @@ class home extends BasePage {
             <div className='home-article' >
                 <div className='home-article-title'>{item.name}</div>
                 <div className='home-article-content'>
-                    {HomdeMode.dealWithContent(item.content)}
+                    {/* {HomdeMode.dealWithContent(item.content)} */}
                 </div>
                 <div className='home-article-item'>
                     {timer.format(str)}

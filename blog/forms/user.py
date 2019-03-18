@@ -60,10 +60,10 @@ class LoginForm(forms.Form):
         super(LoginForm, self).__init__(*args,**kwargs)
 
     def clean(self):
-        email = self.cleaned_data.get('email')
+        username = self.cleaned_data.get('email')
         user_name = self.cleaned_data.get('username')
         password = self.cleaned_data.get('password')
-        username = user_name if user_name.strip() != '' else email
+        # username = user_name if user_name.strip() != '' else email
         if username and password:
             self.user_cache = authenticate(username=username,password=password)
             if self.user_cache is None:

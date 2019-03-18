@@ -115,12 +115,10 @@ def get_topic(request):
             mode = item.blog_set.order_by('id').values()
             obj['title'] = model_to_dict(item)['title']
             arr = []
+            print('mode',mode)
             for model in mode:
                 model['content'] = dr.sub('', model.get('content'))
                 arr.append(model)
-            # model = mode[0]
-            # model['Content'] = dr.sub('', model.get('Content'))
-            # obj['data'] = model
             obj['data'] = arr
             objs.append(obj)
     return returnJson.json_responre(objs)

@@ -8,7 +8,15 @@ import { Link } from 'react-router-dom';
 
 import { StringUtil, TimerUtil } from '../utills/index';
 
+import *  as server from '../servers/index'
+
 class HomeComponents extends BaseComponents {
+
+    componentDidMount() {
+        server.getArticleList().then((result) => {
+        }).catch((error) => {
+        })
+    }
 
     renderItem(item) {
         let str = item.update;

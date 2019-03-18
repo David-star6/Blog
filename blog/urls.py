@@ -25,7 +25,7 @@ urlpatterns = [
 
     url(r'^api/login/$',common.method_splitter,{'POST':user.user_login}),
     url(r'^api/register/$', common.method_splitter, {"POST": user.post_api_login}),
-    url(r'^api/get_topic_list$', common.method_splitter, {"GET": topic.get_topic}),
+    url(r'^articl/list$', common.method_splitter, {"GET": topic.get_topic}),
     url(r'^api/get_topic_content/$', common.method_splitter, {"POST": topic.get_topic_content}),
 
     # url(r'^api/test/$',common.method_splitter,{'GET':user.get_charm}),

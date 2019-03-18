@@ -19,8 +19,8 @@ from django.conf import settings
 from django.contrib.auth.decorators import login_required
 from django.contrib import admin
 
-admin.autodiscover()
-admin.site.login = login_required(admin.site.login)  # 设置admin登录的页面，settings.LOGIN_URL
+# admin.autodiscover()
+# admin.site.login = login_required(admin.site.login)  # 设置admin登录的页面，settings.LOGIN_URL
 
 from django.urls import path
 import blog.urls
@@ -30,7 +30,7 @@ from DjangoUeditor import urls as DjangoUeditor_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    url(r'^', include(blog.urls)),
+    # url(r'^', include(blog.urls)),
     url(r'^manage/admin', admin.site.urls),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
     # 增加以下一行，以识别静态资源

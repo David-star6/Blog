@@ -32,19 +32,6 @@ APPEND_SLASH=True #设置项是否开启URL访问地址后面不为/跳转至带
 
 # Application definition
 
-
-# INSTALLED_APPS = [
-#     'django.contrib.admin',
-#     'django.contrib.auth',
-#     'django.contrib.contenttypes',
-#     'django.contrib.sessions',
-#     'django.contrib.messages',
-#     'django.contrib.staticfiles',
-#     'rest_framework',
-#     'rest_framework.authtoken',
-# ]
-
-
 REST_FRAMEWORK = {
     'DEFAULT_PERMISSION_CLASSES': (
         'rest_framework.permissions.IsAuthenticated',#只能被注册的用户访问
@@ -63,14 +50,14 @@ MIDDLEWARE = [
     'django.contrib.sessions.middleware.SessionMiddleware',
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
-    # 'django.middleware.csrf.CsrfViewMiddleware',
+    'django.middleware.csrf.CsrfViewMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
 CORS_ORIGIN_ALLOW_ALL = True
-
+#
 # MIDDLEWARE_CLASSES = (
 #     'django.middleware.cache.UpdateCacheMiddleware', # 缓存中间件，必须放在开头
 #     'django.middleware.common.CommonMiddleware',
@@ -86,21 +73,6 @@ CORS_ORIGIN_ALLOW_ALL = True
 
 ROOT_URLCONF = 'mysite.urls'
 
-# TEMPLATES = [
-#     {
-#         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-#         'DIRS': [],
-#         'APP_DIRS': True,
-#         'OPTIONS': {
-#             'context_processors': [
-#                 'django.template.context_processors.debug',
-#                 'django.template.context_processors.request',
-#                 'django.contrib.auth.context_processors.auth',
-#                 'django.contrib.messages.context_processors.messages',
-#             ],
-#         },
-#     },
-# ]
 
 WSGI_APPLICATION = 'mysite.wsgi.application'
 
@@ -143,9 +115,9 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/2.0/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'zh-hans'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Shanghai'
 
 USE_I18N = True
 
@@ -196,16 +168,16 @@ TEMPLATE_CONTEXT_PROCESSORS = (  # F2E中有current_user对象和request对象,�
 )
 
 INSTALLED_APPS = (
+    # Uncomment the next line to enable the admin:
+    'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
-    'django.contrib.sites',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-    # Uncomment the next line to enable the admin:
-    'django.contrib.admin',
     # Uncomment the next line to enable admin documentation:
     # 'django.contrib.admindocs',
+    # 'django.contrib.sites',
     'DjangoUeditor',
     'django.contrib.sitemaps',  # Django sitemap framework
     'blog',
@@ -223,7 +195,9 @@ AUTHENTICATION_BACKENDS = (
 )
 
 # 默认登陆uri
-LOGIN_URL = '/login/'
+# LOGIN_REDIRECT_URL = '/'
+# LOGIN_URL = '/auth/login/'
+# LOGOUT_URL = '/auth/logout/'
 
 # 注册用户保留关键字，非Django设置
 RESERVED = ["user", "topic", "home", "setting", "forgot", "login", "logout", "register", "admin"]
