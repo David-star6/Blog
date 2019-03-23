@@ -1,10 +1,12 @@
 import 'whatwg-fetch'
 
+const qs = require('qs');
+
 export default function request(method, url, body) {
     if (method === 'GET') {
         body = undefined;
     } else {
-        body = body && JSON.stringify(body);
+        body = body && JSON.stringify(body)
     }
     return new Promise((reslove, reject) => {
         fetch(url, {
@@ -21,7 +23,6 @@ export default function request(method, url, body) {
         }).catch((ex) => {
             reject('请求失败！');
         });
-        console.log(url)
     })
 }
 

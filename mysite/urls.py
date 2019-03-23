@@ -30,7 +30,7 @@ from DjangoUeditor import urls as DjangoUeditor_urls
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    # url(r'^', include(blog.urls)),
+    url(r'^', include(blog.urls)),
     url(r'^manage/admin', admin.site.urls),
     url(r'^ueditor/', include(DjangoUeditor_urls)),
     # 增加以下一行，以识别静态资源

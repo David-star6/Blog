@@ -26,6 +26,7 @@ class App extends BasePage {
     this.state = {
       title: 'dvd'
     }
+    // console.log(this.props)
   }
 
   render() {
@@ -39,7 +40,7 @@ class App extends BasePage {
             {/* <Route path='/app/index' render={props => {
               return <Home />
             }}></Route> */}
-            <Routes />
+            <Routes {...this.props} />
           </Content>
           <Footer style={{ textAlign: 'center', backgroundColor: this._MAIN_COLOR }}>
             React-Admin ©{new Date().getFullYear()} Created by dvd

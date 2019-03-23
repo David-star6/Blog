@@ -14,8 +14,7 @@ let timer = {
         // return new Date(parseInt(obj) * 1000).toLocaleString()
     },
     format: (obj) => {
-        var timestamp = new Date(parseInt(obj) * 1000)
-        var timestamp = new Date()
+        var timestamp = new Date(String(obj).length < 13 ? parseInt(obj) * 1000 : parseInt(obj))
         return format.dateFormat(timestamp)
     },
     currentData: () => {

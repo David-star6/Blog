@@ -8,7 +8,7 @@ from django.utils import timezone
 from django.conf import settings
 from blog.models import ForumUser
 from django.http import JsonResponse
-from blog.models import ForumUser, Topic, Blog
+from blog.models import ForumUser, Blog
 from django.core import serializers
 from django.forms.models import model_to_dict
 from blog.views import returnJson
@@ -38,22 +38,22 @@ from blog.forms.TestUeditorModelForm import TestUEditorForm
 # from DjangoUeditor.forms import UEditorField class TestUEditorForm(forms.Form):
 #     Description=UEditorField("描述",initial="abc",width=600,height=800)
 
-
-def get_index(requset):
-    user = requset.user
-    # if user.is_authenticated():
-    # 	counter = {
-    # 	'topics':user.topic_author.all().count(),
-    # 	'replies':user.rely_author.all().count(),
-    # 	'favorites':user.fav_user.all().count()
-    # 	}
-    # status_counter={
-    #    'users':ForumUser.objects.all().count(),
-    # }
-    # return render_to_response('topic/topicHome.html',locals())
-    topic_list = Topic.objects.all().order_by('id').values()
-    form = TestUEditorForm()
-    return render_to_response('topic/topicHome.html', {'topic_list': topic_list, "form": form})
+#
+# def get_index(requset):
+#     user = requset.user
+#     # if user.is_authenticated():
+#     # 	counter = {
+#     # 	'topics':user.topic_author.all().count(),
+#     # 	'replies':user.rely_author.all().count(),
+#     # 	'favorites':user.fav_user.all().count()
+#     # 	}
+#     # status_counter={
+#     #    'users':ForumUser.objects.all().count(),
+#     # }
+#     # return render_to_response('topic/topicHome.html',locals())
+#     topic_list = Topic.objects.all().order_by('id').values()
+#     form = TestUEditorForm()
+#     return render_to_response('topic/topicHome.html', {'topic_list': topic_list, "form": form})
 
 
 def get_List(request):
@@ -73,23 +73,23 @@ def get_user_list(requset):
         return returnJson.json_responre(json.loads(data), safe=False)
 
 
-class ClassEncoder(json.JSONEncoder):
-    def default(self, o):
-        if isinstance(o, Topic):
-            return o.title
-        elif isinstance(o, Topic):
-            return o.description
-        return json.JSONEncoder.default(self, o)
-
-
-def get_topic_title(request):
-    fid = request.GET.get('id')
-    try:
-        data = Topic.objects.get(id=fid)
-        u = json.dumps(model_to_dict(data), cls=returnJson.DataTimeEncoder)
-        return returnJson.json_responre(json.loads(u), safe=False)
-    except Topic.DoesNotExist:
-        return returnJson.json_error('no exist', safe=False)
+# class ClassEncoder(json.JSONEncoder):
+#     def default(self, o):
+#         if isinstance(o, Topic):
+#             return o.title
+#         elif isinstance(o, Topic):
+#             return o.description
+#         return json.JSONEncoder.default(self, o)
+#
+#
+# def get_topic_title(request):
+#     fid = request.GET.get('id')
+#     try:
+#         data = Topic.objects.get(id=fid)
+#         u = json.dumps(model_to_dict(data), cls=returnJson.DataTimeEncoder)
+#         return returnJson.json_responre(json.loads(u), safe=False)
+#     except Topic.DoesNotExist:
+#         return returnJson.json_error('no exist', safe=False)
 
 
 def get_topi_content(request):
@@ -105,23 +105,22 @@ def expire_page(path):
     if cache.has_key(key):
         cache.delete(key)
 
-
-def get_topic(request):
-    topicList = Topic.objects.all().order_by('id')
-    objs = []
-    dr = re.compile(r'<[^>]+>',re.S)
-    for item in topicList:
-            obj = {}
-            mode = item.blog_set.order_by('id').values()
-            obj['title'] = model_to_dict(item)['title']
-            arr = []
-            print('mode',mode)
-            for model in mode:
-                model['content'] = dr.sub('', model.get('content'))
-                arr.append(model)
-            obj['data'] = arr
-            objs.append(obj)
-    return returnJson.json_responre(objs)
+# def get_topic(request):
+#     # topicList = Topic.objects.all().order_by('id')
+#     objs = []
+#     dr = re.compile(r'<[^>]+>',re.S)
+#     for item in topicList:
+#             obj = {}
+#             mode = item.blog_set.order_by('id').values()
+#             obj['title'] = model_to_dict(item)['title']
+#             arr = []
+#             print('mode',mode)
+#             for model in mode:
+#                 model['content'] = dr.sub('', model.get('content'))
+#                 arr.append(model)
+#             obj['data'] = arr
+#             objs.append(obj)
+#     return returnJson.json_responre(objs)
 
 
 def get_topic_content(request):
@@ -131,26 +130,26 @@ def get_topic_content(request):
     u = json.dumps(model_to_dict(model), cls=returnJson.DataTimeEncoder)
     return returnJson.json_responre(json.loads(u), safe=False)
 
-class topicList(ListView):
-    template_name = 'topic/topicHome.html'
-    context_object_name = 'topic_list'
-    # model = Topic
-    paginate_by = 2  # 一个页面显示的条目
-
-    def get_queryset(self):
-        topic_list = Topic.objects.all().order_by('id')
-        objs = []
-        for item in topic_list:
-            try:
-                obj = {}
-                mode = item.blog_set.order_by('id').values()
-                obj['title'] = model_to_dict(item)['title']
-                obj['data'] = list(mode)
-                objs.append(obj)
-            except:
-                print('null')
-        return objs
-
-    def get_context_data(self, *, object_list=None, **kwargs):
-        kwargs['category_list'] = Topic.objects.all().order_by('id').values()
-        return super(topicList, self).get_context_data(**kwargs)
+# class topicList(ListView):
+#     template_name = 'topic/topicHome.html'
+#     context_object_name = 'topic_list'
+#     # model = Topic
+#     paginate_by = 2  # 一个页面显示的条目
+#
+#     def get_queryset(self):
+#         topic_list = Topic.objects.all().order_by('id')
+#         objs = []
+#         for item in topic_list:
+#             try:
+#                 obj = {}
+#                 mode = item.blog_set.order_by('id').values()
+#                 obj['title'] = model_to_dict(item)['title']
+#                 obj['data'] = list(mode)
+#                 objs.append(obj)
+#             except:
+#                 print('null')
+#         return objs
+#
+#     def get_context_data(self, *, object_list=None, **kwargs):
+#         kwargs['category_list'] = Topic.objects.all().order_by('id').values()
+#         return super(topicList, self).get_context_data(**kwargs)
