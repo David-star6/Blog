@@ -30,9 +30,13 @@ class ArticleDetailComponents extends BaseComponents {
     render() {
         const { title, content } = this.state
         return (
-            <div>
-                <div>{title}</div>
-                <div dangerouslySetInnerHTML={{ __html: content }}></div>
+            <div className='article'>
+                <div className='article-title'>
+                    <h1 >{title}</h1>
+                </div>
+                <div className='article-content'>
+                    <div dangerouslySetInnerHTML={{ __html: content }}></div>
+                </div>
             </div>
         );
     }
