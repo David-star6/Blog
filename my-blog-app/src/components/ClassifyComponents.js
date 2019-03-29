@@ -4,10 +4,18 @@ import { BaseComponents, ListView, MenuView } from '../common/index'
 
 import { Row, Col } from 'antd';
 
+import *  as server from '../servers/index'
+
 class ClassifyComponents extends BaseComponents {
 
     state = {
         classify: ['2019年1月10日', 2, 3, 4, 5, 6, 7, 8, 10, 30, 120, 123, 123, 213, 2, 12, 3]
+    }
+
+    componentDidMount() {
+        server.getArticleDateList().then((date) => {
+            console.log(date)
+        })
     }
 
     renderClass(item) {

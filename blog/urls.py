@@ -11,6 +11,7 @@ urlpatterns = [
     #articl
     url(r'^articl/list$', common.method_splitter, {"GET": articl.get_list}),
     url(r'^articl/detail', common.method_splitter, {"POST": articl.get_detail}),
+    url(r'^articl/datelist',common.method_splitter,{'GET':articl.get_list_date}),
 
     # url(r'^$',common.method_splitter,{'GET':topic.get_index}),
     # url(r'^$',topic.topicList.as_view(),name='detail'),
