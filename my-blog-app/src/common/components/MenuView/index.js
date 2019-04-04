@@ -1,6 +1,13 @@
 import React, { Component } from 'react';
 
+import PropTypes from 'prop-types';
+
 class index extends Component {
+
+    static defaultProps = {
+        title: PropTypes.string,
+        data: PropTypes.array,
+    }
 
     renderItem(des, index) {
         return <a key={index} href={'javascript:void(0);'} style={{ display: 'block', lineHeight: '40px', }} onClick={() => {
@@ -11,7 +18,7 @@ class index extends Component {
     }
 
     render() {
-        const { title, data } = this.props || []
+        const { title, data } = this.props
         const heights = document.documentElement.clientHeight - 200
         return (
             <div style={{ height: heights, overflow: 'scroll', borderWidth: '1px', borderColor: '#bbb', borderStyle: 'none solid none none  ' }}>

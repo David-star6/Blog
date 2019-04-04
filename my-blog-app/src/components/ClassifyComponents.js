@@ -2,46 +2,62 @@ import React, { Component } from 'react';
 
 import { BaseComponents, ListView, MenuView } from '../common/index'
 
-import { Row, Col } from 'antd';
+import { Row, Col, } from 'antd';
+
+import { StringUtil, TimerUtil } from '../utills/index';
 
 import *  as server from '../servers/index'
+
+import { Link } from 'react-router-dom';
 
 class ClassifyComponents extends BaseComponents {
 
     state = {
-        classify: ['2019年1月10日', 2, 3, 4, 5, 6, 7, 8, 10, 30, 120, 123, 123, 213, 2, 12, 3]
+        classify: [],
+        selectIndex: 0,
+        data: []
     }
 
     componentDidMount() {
-        server.getArticleDateList().then((date) => {
-            console.log(date)
+        server.getArticleDateList().then((result) => {
+            let date = []
+            result.data.map((item, index) => {
+                date.push(item.date)
+            })
+            this.setState({ classify: date, data: result.data }, () => {
+                console.log(result.data)
+            })
         })
     }
 
     renderClass(item) {
-        return <a
-            href={'javascript:void(0);'}
-            style={{ fontSize: '16px', display: 'block', lineHeight: '40px', textAlign: 'left', paddingLeft: '40px', paddingRight: '15px' }}
-            onClick={() => {
-                console.log('12')
-            }}
-        >
-            <span style={{ fontSize: '16px', marginRight: '40px' }}>2018-9-129</span>{item}
-        </a>
+        return <Link to={{
+            pathname: '/app/article',
+            hash: `#${item.id}`,
+            query: item,
+            state: '1121'
+        }}>
+            <div style={{ fontSize: '16px', display: 'block', lineHeight: '40px', textAlign: 'left', paddingLeft: '40px', paddingRight: '15px' }}>
+                <span style={{ fontSize: '16px', marginRight: '40px' }}>{TimerUtil.format(item.update)}</span>{item.reContent}
+            </div>
+        </Link>
     }
 
     render() {
+        const data = this.state.data.length > 0 ? this.state.data[`${this.state.selectIndex}`].data : []
         return (
             <div className='class'>
                 <Row >
                     <Col span={6} style={{ backgroundColor: '#ffffff' }}>
-                        <MenuView title={'全部分类'} data={this.state.classify} callback={(result) => {
-                            console.log(result)
+                        <MenuView title={'全部分类'} data={this.state.classify} callback={(selectIndex) => {
+                            this.setState({
+                                selectIndex
+                            })
                         }} />
                     </Col>
                     <Col span={18} style={{ marginTop: '30px', backgroundColor: '#ffffff' }}>
                         <ListView
-                            data={['个人总结', 'ios分类其它', '其它的东西不懂']}
+                            data={data}
                             item={(item) => {
                                 return this.renderClass(item)
                             }}
