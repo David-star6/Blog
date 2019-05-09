@@ -1,17 +1,36 @@
 import React, { Component } from 'react';
 
+import { Menu, Icon } from 'antd';
+
 import PropTypes from 'prop-types';
+
+const SubMenu = Menu.SubMenu;
+
+const MenuItemGroup = Menu.ItemGroup;
 
 class index extends Component {
 
-    static defaultProps = {
+    static propTypes = {
         title: PropTypes.string,
         data: PropTypes.array,
+        select: PropTypes.number,
+    }
+
+    static defaultProps = {
+        select: 0,
+    }
+
+    state = {
+        select: this.props.select || 0
     }
 
     renderItem(des, index) {
-        return <a key={index} href={'javascript:void(0);'} style={{ display: 'block', lineHeight: '40px', }} onClick={() => {
-            this.props.callback && this.props.callback(index)
+        return <a className={'title'} style={{ display: 'block', lineHeight: '40px', color: index == this.state.select ? '#2A2A2A' : '#666', }} key={index} href={'javascript:void(0);'} onClick={() => {
+            this.setState({
+                select: index
+            }, () => {
+                this.props.callback && this.props.callback(index)
+            })
         }} >
             {des}
         </a>
@@ -19,9 +38,8 @@ class index extends Component {
 
     render() {
         const { title, data } = this.props
-        const heights = document.documentElement.clientHeight - 200
         return (
-            <div style={{ height: heights, overflow: 'scroll', borderWidth: '1px', borderColor: '#bbb', borderStyle: 'none solid none none  ' }}>
+            <div style={{ height: document.body.clientHeight, overflow: 'scroll', borderWidth: '1px', borderColor: '#bbb', borderStyle: 'none solid none none  ' }}>
                 <div style={{ marginTop: '30px', fontWeight: 'bold' }}><p>{title}</p></div>
                 {data.map((item, index) => {
                     return this.renderItem(item, index)

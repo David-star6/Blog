@@ -38,9 +38,11 @@ class ClassifyComponents extends BaseComponents {
             state: '1121'
         }}>
             <div style={{ fontSize: '16px', display: 'block', lineHeight: '40px', textAlign: 'left', paddingLeft: '40px', paddingRight: '15px' }}>
-                <span style={{ fontSize: '16px', marginRight: '40px' }}>{TimerUtil.format(item.update)}</span>{item.reContent}
+                <div className='article-class-item'>
+                    <span style={{ fontSize: '16px', marginRight: '40px' }}>{TimerUtil.format(item.update)}</span><b >{item.reContent}</b>
+                </div>
             </div>
-        </Link>
+        </Link >
     }
 
     render() {
@@ -49,11 +51,13 @@ class ClassifyComponents extends BaseComponents {
             <div className='class'>
                 <Row >
                     <Col span={6} style={{ backgroundColor: '#ffffff' }}>
-                        <MenuView title={'全部分类'} data={this.state.classify} callback={(selectIndex) => {
-                            this.setState({
-                                selectIndex
-                            })
-                        }} />
+                        <MenuView title={'全部分类'} data={this.state.classify}
+                            // select={0} 
+                            callback={(selectIndex) => {
+                                this.setState({
+                                    selectIndex
+                                })
+                            }} />
                     </Col>
                     <Col span={18} style={{ marginTop: '30px', backgroundColor: '#ffffff' }}>
                         <ListView

@@ -16,6 +16,8 @@ export default class basePage extends React.Component {
 
     _MAIN_COLOR = '#fff'
 
+    _DEEP_COLOR = '#ccc'
+
     constructor(props) {
         super(props)
         this.state = {

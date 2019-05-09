@@ -42,7 +42,7 @@ class App extends BasePage {
             }}></Route> */}
             <Routes {...this.props} />
           </Content>
-          <Footer style={{ textAlign: 'center', backgroundColor: this._MAIN_COLOR }}>
+          <Footer style={{ textAlign: 'center', backgroundColor: this._DEEP_COLOR }}>
             React-Admin ©{new Date().getFullYear()} Created by dvd
           </Footer>
         </Layout>
