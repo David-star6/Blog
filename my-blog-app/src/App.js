@@ -13,9 +13,11 @@ import Routes from './routes/index'
 
 import { HeaderCustom } from './components/index'
 
-import { BasePage } from './common/index'
+import { BasePage,Store } from './common/index'
 
 import DocumentTitle from 'react-document-title';
+
+import { Provider } from 'react-redux'
 
 const { Content, Footer } = Layout;
 
@@ -32,6 +34,7 @@ class App extends BasePage {
   render() {
     const { title } = this.state;
     return (
+      <Provider store={Store}>
       <DocumentTitle title={title}>
         <Layout style={{ flexDirection: 'column', backgroundColor: this._MAIN_COLOR }}>
           <HeaderCustom />
@@ -53,6 +56,7 @@ class App extends BasePage {
           <Route path='/homedetail' component={homedetail}></Route> 
           */}
       </DocumentTitle>
+      </Provider>
     )
   }
 }

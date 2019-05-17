@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { BaseComponents, ListView } from '../common/index'
+import { BaseComponents, ListView, Action } from '../common/index'
 
 import { List, Avatar, Icon } from 'antd';
 
@@ -9,6 +9,8 @@ import { Link } from 'react-router-dom';
 import { StringUtil, TimerUtil } from '../utills/index';
 
 import *  as server from '../servers/index'
+
+import { connect } from 'react-redux'
 
 class HomeComponents extends BaseComponents {
 
@@ -21,7 +23,13 @@ class HomeComponents extends BaseComponents {
         this.state = {
             data: []
         }
-        console.log('12121', this.props)
+        setTimeout(() => {
+            this.props.dispatch(Action.login('text'))
+        }, 5000);
+    }
+
+    componentWillReceiveProps(props) {
+        console.log(props.text)
     }
 
     componentDidMount() {
@@ -64,4 +72,10 @@ class HomeComponents extends BaseComponents {
     }
 }
 
-export default HomeComponents;
+function selected(state) {
+    return {
+        text: state.loginIn
+    }
+}
+
+export default connect(selected)(HomeComponents);
